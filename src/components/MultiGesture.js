@@ -66,6 +66,7 @@ class MultiGesture extends React.Component {
         // effectively only allows sequences to start with left or right
         if (this.scrolling && Math.abs(gestureState.dy) > this.props.scrollThreshold) {
           this.sequence = ''
+          document.body.style.overflow = 'visible';
           this.abandon = true
           return
         }
