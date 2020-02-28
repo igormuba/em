@@ -50,7 +50,6 @@ class MultiGesture extends React.Component {
       // onPanResponderGrant: (evt, gestureState) => {},
 
       onPanResponderMove: (evt, gestureState) => {
-        this.ScrollLock = true
 
 
         if (this.abandon) {
@@ -72,9 +71,12 @@ class MultiGesture extends React.Component {
         // because scrolling cannot be disabled after it has begin
         // effectively only allows sequences to start with left or right
         if (this.scrolling && Math.abs(gestureState.dy) > this.props.scrollThreshold) {
-          this.sequence = ''
-          this.abandon = true
-          return
+          //allow gesture when scrolling
+          this.ScrollLock = true
+          this.scrolling = false
+          // this.sequence = ''
+          // this.abandon = true
+          // return
         }
 
         const g = gesture(this.currentStart, {
