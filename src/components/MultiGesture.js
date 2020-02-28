@@ -83,6 +83,7 @@ class MultiGesture extends React.Component {
         if (g) {
           this.disableScroll = true
           this.ScrollLock = true
+          document.body.style.overflow = 'hidden';
           this.currentStart = {
             x: gestureState.moveX,
             y: gestureState.moveY
