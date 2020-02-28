@@ -33,7 +33,7 @@ class MultiGesture extends React.Component {
     })
 
     window.addEventListener('scroll', e => {
-      this.scrolling = true
+      this.scrolling = !this.disableScroll
     })
 
     this.panResponder = PanResponder.create({
@@ -129,10 +129,10 @@ MultiGesture.defaultProps = {
   onStart: NOOP,
 
   // fired when a new gesture is added to the sequence
-  onGesture: (gesture, sequence, ev) => {},
+  onGesture: (gesture, sequence, ev) => { },
 
   // fired when all gestures have completed
-  onEnd: (sequence, evt) => {}
+  onEnd: (sequence, evt) => { }
 }
 
 export { MultiGesture }
