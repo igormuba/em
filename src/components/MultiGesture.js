@@ -50,12 +50,15 @@ class MultiGesture extends React.Component {
       // onPanResponderGrant: (evt, gestureState) => {},
 
       onPanResponderMove: (evt, gestureState) => {
+        this.ScrollLock = true
+
 
         if (this.abandon) {
           return
         }
 
         if (!this.currentStart) {
+
           this.scrolling = false
           this.currentStart = {
             x: gestureState.moveX,
@@ -81,7 +84,6 @@ class MultiGesture extends React.Component {
 
         if (g) {
           this.disableScroll = true
-          this.ScrollLock = true
           this.currentStart = {
             x: gestureState.moveX,
             y: gestureState.moveY
