@@ -3,6 +3,10 @@ import React from 'react'
 
 import { NOOP } from '../constants.js'
 
+
+//component to prevent scroll on gestures
+import ScrollLock, { TouchScrollable } from 'react-scrolllock';
+
 // requires installation of react-dom and react-native-web
 import { PanResponder } from 'react-native'
 
@@ -77,6 +81,7 @@ class MultiGesture extends React.Component {
 
         if (g) {
           this.disableScroll = true
+          this.ScrollLock = true
           this.currentStart = {
             x: gestureState.moveX,
             y: gestureState.moveY
@@ -109,10 +114,14 @@ class MultiGesture extends React.Component {
     this.disableScroll = false
     this.scrolling = false
     this.sequence = ''
+    this.lockScroll = false
   }
 
   render() {
-    return <div {...this.panResponder.panHandlers}>{this.props.children}</div>
+    return <div>
+      <div {...this.panResponder.panHandlers}>{this.props.children}</div>
+      <ScrollLock isActive={this.lockScroll} />
+    </div>
   }
 }
 
