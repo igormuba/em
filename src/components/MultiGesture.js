@@ -28,6 +28,7 @@ class MultiGesture extends React.Component {
     // allow enabling/disabling scroll with this.disableScroll
     document.body.addEventListener('touchmove', e => {
       if (this.disableScroll) {
+        this.lockScroll = true
         e.preventDefault()
       }
     }, { passive: false })
@@ -51,13 +52,11 @@ class MultiGesture extends React.Component {
 
       onPanResponderMove: (evt, gestureState) => {
 
-
         if (this.abandon) {
           return
         }
 
         if (!this.currentStart) {
-
           this.scrolling = false
           this.currentStart = {
             x: gestureState.moveX,
@@ -71,12 +70,9 @@ class MultiGesture extends React.Component {
         // because scrolling cannot be disabled after it has begin
         // effectively only allows sequences to start with left or right
         if (this.scrolling && Math.abs(gestureState.dy) > this.props.scrollThreshold) {
-          //allow gesture when scrolling
-          this.ScrollLock = true
-          this.scrolling = false
-          // this.sequence = ''
-          // this.abandon = true
-          // return
+          this.sequence = ''
+          this.abandon = true
+          return
         }
 
         const g = gesture(this.currentStart, {
@@ -86,6 +82,7 @@ class MultiGesture extends React.Component {
 
         if (g) {
           this.disableScroll = true
+          this.ScrollLock = true
           this.currentStart = {
             x: gestureState.moveX,
             y: gestureState.moveY
@@ -132,10 +129,10 @@ class MultiGesture extends React.Component {
 MultiGesture.defaultProps = {
 
   // the distance threshold for a single gesture
-  threshold: 24,
+  threshold: 12,
 
   // the distance to allow scrolling before abandoning the gesture
-  scrollThreshold: 24,
+  scrollThreshold: 12,
 
   // fired at the start of a gesture
   // includes false starts
