@@ -72,6 +72,8 @@ class MultiGesture extends React.Component {
         if (this.scrolling && Math.abs(gestureState.dy) > this.props.scrollThreshold) {
           this.sequence = ''
           this.abandon = true
+          document.body.style.overflow = 'visible';
+
           return
         }
 
@@ -114,6 +116,8 @@ class MultiGesture extends React.Component {
     this.abandon = false
     this.currentStart = null
     this.disableScroll = false
+    document.body.style.overflow = 'visible';
+
     this.scrolling = false
     this.sequence = ''
     this.lockScroll = false
