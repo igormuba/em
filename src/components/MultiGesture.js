@@ -91,8 +91,6 @@ class MultiGesture extends React.Component {
             this.sequence += g
             this.props.onGesture(g, this.sequence, evt)
           }
-        } else {
-          this.reset()
         }
       },
 
