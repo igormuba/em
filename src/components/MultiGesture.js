@@ -33,6 +33,7 @@ class MultiGesture extends React.Component {
     })
 
     window.addEventListener('scroll', e => {
+      this.reset()
       this.scrolling = true
     })
 
